@@ -21,21 +21,32 @@ Lien vers le projet sur webdev : [webdev](https://e2296540.webdev.cmaisonneuve.q
 ## 🚀 Command lines
 
 - Création du projet
+
 `composer create-project --prefer-dist laravel/laravel Maisonneuve2296540`
+
 - Création des modèles
+
 `php artisan make:model Etudiant -m`
 `php artisan make:model Ville -m`
+
 - Création des tables
+
 `php artisan migrate`
+
 - Saisie de 15 nouvelles villes
+
 `php artisan make:factory VilleFactory`
 `php artisan tinker`
 `\App\Models\Ville::factory()->times(15)->create()`
+
 - Saisie de 100 nouveaux étudiants
+
 `php artisan make:factory EtudiantFactory`
 `php artisan tinker`
 `\App\Models\Etudiant::factory()->times(100)->create()`
+
 - Création d'un controller
+
 `php artisan make:controller EtudiantController -m Etudiant`
 
 ## 🎯 Features
@@ -49,7 +60,3 @@ Lien vers le projet sur webdev : [webdev](https://e2296540.webdev.cmaisonneuve.q
 
 ## 🤖 Built With
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white) ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white) ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
-
-## 🌐 Screenshots
-
-![Home page](./screenshot.png)
