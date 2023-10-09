@@ -15,15 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// ACCUEIL
 Route::get('/', [EtudiantController::class, 'index'])->name('etudiant.index');
 
-Route::get('/etudiant-{etudiant}', [EtudiantController::class, 'show'])->name('etudiant.show');
+// ETUDIANTS
+Route::get('/etudiant-{etudiant}', [EtudiantController::class, 'show'])->name('etudiant.show')->middleware('auth');
 
-Route::get('/create', [EtudiantController::class, 'create'])->name('etudiant.create');
+Route::get('/create', [EtudiantController::class, 'create'])->name('etudiant.create')->middleware('auth');
 Route::post('/create', [EtudiantController::class, 'store']);
 
-Route::get('/edit/etudiant-{etudiant}', [EtudiantController::class, 'edit'])->name('etudiant.edit');
+Route::get('/edit/etudiant-{etudiant}', [EtudiantController::class, 'edit'])->name('etudiant.edit')->middleware('auth');
 Route::put('/edit/etudiant-{etudiant}', [EtudiantController::class, 'update']);
 
 Route::delete('/etudiant-{etudiant}', [EtudiantController::class, 'destroy']);
@@ -34,3 +35,5 @@ Route::post('/login', [CustomAuthController::class, 'authentication']);
 
 // LOGOUT :
 Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
+
+// FORUM
