@@ -16,26 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ACCUEIL
-Route::get('/', [EtudiantController::class, 'index'])->name('etudiant.index');
+// HOME
+Route::get('/', function () {
+    return view('home');
+});
 
-// ETUDIANTS
-Route::get('/etudiant-{etudiant}', [EtudiantController::class, 'show'])->name('etudiant.show')->middleware('auth');
-
-Route::get('/create', [EtudiantController::class, 'create'])->name('etudiant.create')->middleware('auth');
-Route::post('/create', [EtudiantController::class, 'store']);
-
-Route::get('/edit/etudiant-{etudiant}', [EtudiantController::class, 'edit'])->name('etudiant.edit')->middleware('auth');
-Route::put('/edit/etudiant-{etudiant}', [EtudiantController::class, 'update']);
-
-Route::delete('/etudiant-{etudiant}', [EtudiantController::class, 'destroy']);
-
-// LOGIN
+// AUTH
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('/login', [CustomAuthController::class, 'authentication']);
-
-// LOGOUT :
 Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
+
+// STUDENTS
+Route::get('/etudiants', [EtudiantController::class, 'index'])->name('etudiant.index')->middleware('auth');
+Route::get('/etudiant/{etudiant}', [EtudiantController::class, 'show'])->name('etudiant.show')->middleware('auth');
+Route::get('/etudiant-create', [EtudiantController::class, 'create'])->name('etudiant.create')->middleware('auth');
+Route::post('/etudiant-create', [EtudiantController::class, 'store']);
+Route::get('/etudiant-edit/{etudiant}', [EtudiantController::class, 'edit'])->name('etudiant.edit')->middleware('auth');
+Route::put('/etudiant-edit/{etudiant}', [EtudiantController::class, 'update']);
+Route::delete('/etudiant-{etudiant}', [EtudiantController::class, 'destroy']);
 
 // FORUM
 Route::get('/forum', [ForumPostController::class, 'index'])->name('forum.index')->middleware('auth');

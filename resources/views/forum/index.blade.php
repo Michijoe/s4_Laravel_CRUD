@@ -1,5 +1,5 @@
 @extends('layouts/app')
-@section('title', 'Tous les articles')
+@section('title', 'Forum')
 @section('content')
 <div class="row text-center">
     <!-- Ajouter un post -->

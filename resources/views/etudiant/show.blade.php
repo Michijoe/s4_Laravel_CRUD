@@ -1,5 +1,5 @@
 @extends('layouts/app')
-@section('title', 'Étudiant')
+@section('title', 'Annuaire des étudiants')
 @section('content')
 <div class="row p-3 m-3 m-md-5 p-md-5 bg-light border rounded-3 border-2">
     <!-- Détail étudiant -->
@@ -16,6 +16,8 @@
         </ul>
     </div>
 
+
+    @if (Auth::user()->id == $etudiant->id)
     <!-- Boutons -->
     <div class="pt-3 col-lg-4 d-flex flex-column gap-3 justify-content-center">
         <!-- Mise à jour -->
@@ -23,6 +25,7 @@
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
     </div>
+    @endif
 </div>
 
 

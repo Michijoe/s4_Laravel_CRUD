@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Ajouter un étudiant')
+@section('title', 'Annuaire des étudiants')
 @section('content')
 <div class="col-lg-8 p-3 mx-auto">
     <!-- Retour -->

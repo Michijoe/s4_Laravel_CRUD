@@ -27,6 +27,8 @@
     </div>
     @endif
 
+    @guest
+    @else
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
@@ -39,24 +41,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    @guest
-                    <a class="nav-link" href="{{route('login')}}">Login</a>
-                    @else
                     <a class="nav-link" href="{{route('etudiant.index')}}">Student List</a>
                     <a class="nav-link" href="{{route('forum.index')}}">Forum</a>
                     <a class="nav-link" href="">Documents</a>
                     <a class="nav-link" href="{{route('logout')}}">Logout</a>
-                    @endguest
                 </div>
             </div>
         </div>
     </nav>
+    @endguest
 
     <!-- Container -->
     <div class="container">
         <div class="row">
             <div class="col-12 pt-2">
-                <h1 class="display-2 mt-4 text-center">{{ config('app.name') }}</h1>
+                <h1 class="display-2 mt-4 text-center">@yield('title')</h1>
                 <div class="container mb-4">
                     <hr>
                     @yield('content')

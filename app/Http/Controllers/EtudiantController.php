@@ -42,7 +42,7 @@ class EtudiantController extends Controller
             'date_naissance'  => $request->date_naissance,
             'ville_id'        => $request->ville_id
         ]);
-        return redirect('etudiant-' . $newPost->id)->withSuccess('Étudiant ajouté');
+        return redirect('etudiant/' . $newPost->id)->withSuccess('Étudiant ajouté');
     }
 
     /**
@@ -76,7 +76,7 @@ class EtudiantController extends Controller
             'date_naissance'  => $request->date_naissance,
             'ville_id'        => $request->ville_id
         ]);
-        return redirect('etudiant-' . $etudiant->id)->withSuccess('Étudiant modifié');
+        return redirect('etudiant/' . $etudiant->id)->withSuccess('Étudiant modifié');
     }
 
     /**
