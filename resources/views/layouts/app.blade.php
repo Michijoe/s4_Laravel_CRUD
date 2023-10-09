@@ -17,6 +17,42 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
+
+    <!-- Pop-up Errors -->
+    @if(!$errors->isEmpty())
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        @foreach($errors->all() as $error)
+        <p class="text-danger">{{$error}}</p>
+        @endforeach
+    </div>
+    @endif
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <!-- on déclare la variable $locale -->
+            <!-- @php $locale = session()->get('locale'); @endphp -->
+
+            <a class="navbar-brand" href="#">Hello {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    @guest
+                    <a class="nav-link" href="{{route('login')}}">Login</a>
+                    @else
+                    <a class="nav-link" href="{{route('etudiant.index')}}">Student List</a>
+                    <a class="nav-link" href="">Blog</a>
+                    <a class="nav-link" href="">Documents</a>
+                    <a class="nav-link" href="{{route('logout')}}">Logout</a>
+                    @endguest
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Container -->
     <div class="container">
         <div class="row">
             <div class="col-12 pt-2">

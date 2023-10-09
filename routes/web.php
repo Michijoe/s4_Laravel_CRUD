@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EtudiantController;
+use App\Http\Controllers\CustomAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,10 @@ Route::get('/edit/etudiant-{etudiant}', [EtudiantController::class, 'edit'])->na
 Route::put('/edit/etudiant-{etudiant}', [EtudiantController::class, 'update']);
 
 Route::delete('/etudiant-{etudiant}', [EtudiantController::class, 'destroy']);
+
+// LOGIN
+Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
+Route::post('/login', [CustomAuthController::class, 'authentication']);
+
+// LOGOUT :
+Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
