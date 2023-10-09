@@ -43,7 +43,7 @@
                     <a class="nav-link" href="{{route('login')}}">Login</a>
                     @else
                     <a class="nav-link" href="{{route('etudiant.index')}}">Student List</a>
-                    <a class="nav-link" href="">Forum</a>
+                    <a class="nav-link" href="{{route('forum.index')}}">Forum</a>
                     <a class="nav-link" href="">Documents</a>
                     <a class="nav-link" href="{{route('logout')}}">Logout</a>
                     @endguest

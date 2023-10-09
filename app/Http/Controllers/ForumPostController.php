@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Etudiant;
+use App\Models\ForumPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ForumPostController extends Controller
 {
@@ -12,7 +13,10 @@ class ForumPostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = ForumPost::Select()
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        return view('forum.index', ['posts' => $posts]);
     }
 
     /**
@@ -20,7 +24,7 @@ class ForumPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('forum.create');
     }
 
     /**
@@ -28,38 +32,52 @@ class ForumPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newPost = ForumPost::create([
+            'title'        => $request->title,
+            'title_fr'     => $request->title_fr,
+            'body'         => $request->body,
+            'body_fr'      => $request->body_fr,
+            'user_id'      => Auth::user()->id
+        ]);
+        return redirect('forum/' . $newPost->id)->withSuccess(trans('Votre article a été créé'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Etudiant $etudiant)
+    public function show(ForumPost $forumPost)
     {
-        //
+        return view('forum.show', ['forumPost' => $forumPost]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Etudiant $etudiant)
+    public function edit(ForumPost $forumPost)
     {
-        //
+        return view('forum.edit', ['forumPost' => $forumPost]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Etudiant $etudiant)
+    public function update(Request $request, ForumPost $forumPost)
     {
-        //
+        $forumPost->update([
+            'title'     => $request->title,
+            'title_fr'  => $request->title_fr,
+            'body'      => $request->body,
+            'body_fr'   => $request->body_fr
+        ]);
+        return redirect('forum/' . $forumPost->id)->withSuccess('Article modifié');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Etudiant $etudiant)
+    public function destroy(ForumPost $forumPost)
     {
-        //
+        $forumPost->delete();
+        return redirect(route('forum.index'))->withSuccess('Article supprimé');
     }
 }

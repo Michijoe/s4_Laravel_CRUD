@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\ForumPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,3 +38,10 @@ Route::post('/login', [CustomAuthController::class, 'authentication']);
 Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
 
 // FORUM
+Route::get('/forum', [ForumPostController::class, 'index'])->name('forum.index')->middleware('auth');
+Route::get('/forum/{forumPost}', [ForumPostController::class, 'show'])->name('forum.show')->middleware('auth');
+Route::get('/forum-create', [ForumPostController::class, 'create'])->name('forum.create')->middleware('auth');
+Route::post('/forum-create', [ForumPostController::class, 'store']);
+Route::get('/forum-edit/{forumPost}', [ForumPostController::class, 'edit'])->name('forum.edit');
+Route::put('/forum-edit/{forumPost}', [ForumPostController::class, 'update']);
+Route::delete('/forum/{forumPost}', [ForumPostController::class, 'destroy']);
