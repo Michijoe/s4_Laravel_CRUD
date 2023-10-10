@@ -3,6 +3,7 @@
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ForumPostController;
+use App\Http\Controllers\DocFileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,3 +44,9 @@ Route::post('/forum-create', [ForumPostController::class, 'store']);
 Route::get('/forum-edit/{forumPost}', [ForumPostController::class, 'edit'])->name('forum.edit');
 Route::put('/forum-edit/{forumPost}', [ForumPostController::class, 'update']);
 Route::delete('/forum/{forumPost}', [ForumPostController::class, 'destroy']);
+
+// DOCSHARE
+Route::get('/docshare', [DocFileController::class, 'index'])->name('docshare.index')->middleware('auth');
+Route::get('/docshare/{docFile}', [DocFileController::class, 'show'])->name('docshare.show')->middleware('auth');
+Route::get('/docshare-create', [DocFileController::class, 'create'])->name('docshare.create')->middleware('auth');
+Route::post('/docshare-create', [DocFileController::class, 'store']);

@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class DocFile extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'title_fr',
+        'file_name',
+        'user_id',
+    ];
+
+    public function fileHasUser()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
 }

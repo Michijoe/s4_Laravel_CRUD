@@ -43,7 +43,7 @@
                 <div class="navbar-nav">
                     <a class="nav-link" href="{{route('etudiant.index')}}">Student List</a>
                     <a class="nav-link" href="{{route('forum.index')}}">Forum</a>
-                    <a class="nav-link" href="">Documents</a>
+                    <a class="nav-link" href="{{route('docshare.index')}}">Documents</a>
                     <a class="nav-link" href="{{route('logout')}}">Logout</a>
                 </div>
             </div>

@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('doc_files', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 100);
+            $table->string('title_fr', 100);
+            $table->string('file_name', 100);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('title_fr', 100);
             $table->text('body');
             $table->text('body_fr');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
