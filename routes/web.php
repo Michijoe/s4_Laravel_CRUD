@@ -34,7 +34,7 @@ Route::get('/etudiant-create', [EtudiantController::class, 'create'])->name('etu
 Route::post('/etudiant-create', [EtudiantController::class, 'store']);
 Route::get('/etudiant-edit/{etudiant}', [EtudiantController::class, 'edit'])->name('etudiant.edit')->middleware('auth');
 Route::put('/etudiant-edit/{etudiant}', [EtudiantController::class, 'update']);
-Route::delete('/etudiant-{etudiant}', [EtudiantController::class, 'destroy']);
+Route::delete('/etudiant/{etudiant}', [EtudiantController::class, 'destroy']);
 
 // FORUM
 Route::get('/forum', [ForumPostController::class, 'index'])->name('forum.index')->middleware('auth');

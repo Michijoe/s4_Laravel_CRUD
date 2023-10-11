@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Etudiant;
+use App\Models\User;
 use App\Models\Ville;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,15 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
-        $newPost = Etudiant::create([
+        $newUser = User::create([
+            'name'     => $request->nom,
+            'email'    => $request->email,
+            'password' => bcrypt('password')
+        ]);
+        $request->merge(['user_id' => $newUser->id]);
+
+        $newStudent = Etudiant::create([
+            'id'              => $request->user_id,
             'nom'             => $request->nom,
             'adresse'         => $request->adresse,
             'telephone'       => $request->telephone,
@@ -42,7 +51,8 @@ class EtudiantController extends Controller
             'date_naissance'  => $request->date_naissance,
             'ville_id'        => $request->ville_id
         ]);
-        return redirect('etudiant/' . $newPost->id)->withSuccess('Étudiant ajouté');
+
+        return redirect('etudiant/' . $newUser->id)->withSuccess('Étudiant ajouté');
     }
 
     /**
@@ -68,6 +78,12 @@ class EtudiantController extends Controller
      */
     public function update(Request $request, Etudiant $etudiant)
     {
+        $user = User::find($etudiant->id);
+        $user->update([
+            'name'  => $request->nom,
+            'email' => $request->email
+        ]);
+
         $etudiant->update([
             'nom'             => $request->nom,
             'adresse'         => $request->adresse,
@@ -84,7 +100,8 @@ class EtudiantController extends Controller
      */
     public function destroy(Etudiant $etudiant)
     {
-        $etudiant->delete();
+        $user = User::find($etudiant->id);
+        $user->delete();
         return redirect(route('etudiant.index'))->withSuccess('Étudiant supprimé');
     }
 }

@@ -23,7 +23,7 @@ class CustomAuthController extends Controller
      */
     public function create()
     {
-        return view('auth.create');
+        //
     }
 
     /**

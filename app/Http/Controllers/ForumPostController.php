@@ -55,6 +55,9 @@ class ForumPostController extends Controller
      */
     public function edit(ForumPost $forumPost)
     {
+        if (Auth::user()->id != $forumPost->user_id) {
+            return redirect(route('forum.index'))->withError('Vous n\'avez pas le droit de modifier cet article');
+        }
         return view('forum.edit', ['forumPost' => $forumPost]);
     }
 
@@ -77,6 +80,9 @@ class ForumPostController extends Controller
      */
     public function destroy(ForumPost $forumPost)
     {
+        if (Auth::user()->id != $forumPost->user_id) {
+            return redirect(route('forum.index'))->withError('Vous n\'avez pas le droit de supprimer cet article');
+        }
         $forumPost->delete();
         return redirect(route('forum.index'))->withSuccess('Article supprimé');
     }
