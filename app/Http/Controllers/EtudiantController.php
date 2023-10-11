@@ -6,6 +6,8 @@ use App\Models\Etudiant;
 use App\Models\User;
 use App\Models\Ville;
 use Illuminate\Http\Request;
+// Pour valider les dates
+use Carbon\Carbon;
 
 class EtudiantController extends Controller
 {
@@ -35,13 +37,25 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
+        // Valider les données
+        $request->validate(([
+            'nom'             => 'required|min:2|max:50',
+            'adresse'         => 'required|min:2',
+            'telephone'       => 'required|min_digits:10',
+            'email'           => 'required|email|unique:App\Models\User,email',
+            'date_naissance'  => 'required|date:Y-m-d|after:' . Carbon::now()->subYears(90)->format('Y-m-d') . '|before:' . Carbon::now()->subYears(18)->format('Y-m-d'),
+            'ville_id'        => 'required|exists:App\Models\Ville,id'
+        ]));
+
+        // Créer le user
         $newUser = User::create([
             'name'     => $request->nom,
             'email'    => $request->email,
-            'password' => bcrypt('password')
+            'password' => bcrypt('Maisonneuve!1234')
         ]);
         $request->merge(['user_id' => $newUser->id]);
 
+        // Créer l'étudiant
         $newStudent = Etudiant::create([
             'id'              => $request->user_id,
             'nom'             => $request->nom,
@@ -78,12 +92,25 @@ class EtudiantController extends Controller
      */
     public function update(Request $request, Etudiant $etudiant)
     {
+        // Valider les données
+        $request->validate(([
+            'nom'             => 'required|min:2|max:50',
+            'adresse'         => 'required|min:2',
+            'telephone'       => 'required|min_digits:10',
+            // valider que le nouvel email est unique sauf si c'est le même que l'ancien
+            'email'           => 'required|email|unique:App\Models\User,email,' . $etudiant->id,
+            'date_naissance'  => 'required|date:Y-m-d|after:' . Carbon::now()->subYears(90)->format('Y-m-d') . '|before:' . Carbon::now()->subYears(18)->format('Y-m-d'),
+            'ville_id'        => 'required|exists:App\Models\Ville,id'
+        ]));
+
+        // Mettre à jour le user
         $user = User::find($etudiant->id);
         $user->update([
             'name'  => $request->nom,
             'email' => $request->email
         ]);
 
+        // Mettre à jour l'étudiant
         $etudiant->update([
             'nom'             => $request->nom,
             'adresse'         => $request->adresse,
@@ -100,6 +127,7 @@ class EtudiantController extends Controller
      */
     public function destroy(Etudiant $etudiant)
     {
+        // Supprimer le user et l'étudiant avec la contrainte de clé étrangère (cascade on delete)
         $user = User::find($etudiant->id);
         $user->delete();
         return redirect(route('etudiant.index'))->withSuccess('Étudiant supprimé');

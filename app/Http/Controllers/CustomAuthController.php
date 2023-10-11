@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
-// Pour valider l'authentification
 use Illuminate\Support\Facades\Auth;
+
 
 class CustomAuthController extends Controller
 {
@@ -16,6 +15,43 @@ class CustomAuthController extends Controller
     public function index()
     {
         return view('auth.index');
+    }
+
+    /**
+     * LOGIN
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function authentication(Request $request)
+    {
+        // Validation des données
+        $request->validate(([
+            'email'     => 'required|email|exists:users',
+            'password'  => ['required']
+        ]));
+
+        // Authentification
+        $credentials = $request->only('email', 'password');
+        if (!Auth::validate($credentials)) :
+            return redirect('login')
+                ->withErrors(trans('auth.password'))
+                ->withInput();
+        endif;
+
+        // Login
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        Auth::login($user);
+
+        return redirect()->intended(route('etudiant.index'));
+    }
+
+    /**
+     * LOGOUT
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('login'));
     }
 
     /**
@@ -64,42 +100,5 @@ class CustomAuthController extends Controller
     public function destroy(User $user)
     {
         //
-    }
-
-
-    /**
-     * LOGIN
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function authentication(Request $request)
-    {
-        $request->validate(([
-            'email'     => 'required|email|exists:users',
-            'password'  => 'required|min:6|max:20'
-        ]));
-        $credentials = $request->only('email', 'password');
-        if (!Auth::validate($credentials)) :
-            return redirect('login')
-                ->withErrors(trans('auth.password'))
-                ->withInput();
-        endif;
-
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
-        Auth::login($user);
-
-        return redirect()->intended(route('etudiant.index'));
-    }
-
-
-
-    /**
-     * LOGOUT
-     */
-    public function logout()
-    {
-        Auth::logout();
-        return redirect(route('login'));
     }
 }

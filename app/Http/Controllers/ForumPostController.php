@@ -32,6 +32,15 @@ class ForumPostController extends Controller
      */
     public function store(Request $request)
     {
+        // Valider les données
+        $request->validate(([
+            'title'     => 'required|min:2|max:50',
+            'title_fr'  => 'nullable|min:2|max:50',
+            'body'      => 'required|min:10',
+            'body_fr'   => 'nullable|min:10'
+        ]));
+
+        // Créer le post
         $newPost = ForumPost::create([
             'title'        => $request->title,
             'title_fr'     => $request->title_fr,
@@ -66,6 +75,15 @@ class ForumPostController extends Controller
      */
     public function update(Request $request, ForumPost $forumPost)
     {
+        // Valider les données
+        $request->validate(([
+            'title'     => 'required|min:2|max:50',
+            'title_fr'  => 'nullable|min:2|max:50',
+            'body'      => 'required|min:10',
+            'body_fr'   => 'nullable|min:10'
+        ]));
+
+        // Mettre à jour l'article
         $forumPost->update([
             'title'     => $request->title,
             'title_fr'  => $request->title_fr,
