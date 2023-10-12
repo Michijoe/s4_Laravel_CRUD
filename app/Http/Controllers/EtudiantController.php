@@ -6,6 +6,9 @@ use App\Models\Etudiant;
 use App\Models\User;
 use App\Models\Ville;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+
 // Pour valider les dates
 use Carbon\Carbon;
 
@@ -47,17 +50,22 @@ class EtudiantController extends Controller
             'ville_id'        => 'required|exists:App\Models\Ville,id'
         ]));
 
+        // Générer mot de passe aléatoire
+        $tempPassword = Str::random(45);
+
         // Créer le user
-        $newUser = User::create([
-            'name'     => $request->nom,
-            'email'    => $request->email,
-            'password' => bcrypt('Maisonneuve!1234')
-        ]);
-        $request->merge(['user_id' => $newUser->id]);
+        $user = new User;
+        $user->name = $request->nom;
+        $user->email = $request->email;
+        // on attribue un password encrypté qui ne sera jamais utilisé pour ne pas laisser vide le champ password
+        $user->password = bcrypt($tempPassword);
+        // on attribue un password temporaire qui sera utilisé pour activer le compte
+        $user->temp_password = $tempPassword;
+        $user->save();
 
         // Créer l'étudiant
         $newStudent = Etudiant::create([
-            'id'              => $request->user_id,
+            'id'              => $user->id,
             'nom'             => $request->nom,
             'adresse'         => $request->adresse,
             'telephone'       => $request->telephone,
@@ -66,7 +74,22 @@ class EtudiantController extends Controller
             'ville_id'        => $request->ville_id
         ]);
 
-        return redirect('etudiant/' . $newUser->id)->withSuccess('Étudiant ajouté');
+        // Envoyer le mot de passe par email
+        $to_name = $user->name;
+        $to_email = $user->email;
+        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>Active ton compte</a>";
+        Mail::send(
+            'email.activation',
+            [
+                'name' => $to_name,
+                'body' => $body
+            ],
+            function ($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject('Active ton compte');
+            }
+        );
+
+        return redirect(route('etudiant.index'))->withSuccess('Le nouvel utilisateur a reçu un lien d\'activation par courriel');
     }
 
     /**

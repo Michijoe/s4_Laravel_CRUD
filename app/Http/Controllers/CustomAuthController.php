@@ -88,19 +88,19 @@ class CustomAuthController extends Controller
         // envoi du courriel
         $to_name = $user->name;
         $to_email = $user->email;
-        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>Cliquer ici pour créer un nouveau mot de passe</a>";
+        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>Réinitialisation</a>";
         Mail::send(
-            'email.mail',
+            'email.reinit',
             [
                 'name' => $to_name,
                 'body' => $body
             ],
             function ($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject('Réinitialiser votre mot de passe');
+                $message->to($to_email, $to_name)->subject('Réinitialise ton mot de passe');
             }
         );
 
-        return redirect(route('login'))->withSuccess('Un lien pour réinitialiser votre mot de passe vous a été envoyé par courriel');
+        return redirect(route('login'))->withSuccess('Un lien pour réinitialiser ton mot de passe a été envoyé par courriel');
     }
 
     /**
