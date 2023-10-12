@@ -25,10 +25,10 @@ class CustomAuthController extends Controller
     public function authentication(Request $request)
     {
         // Validation des données
-        $request->validate(([
+        $request->validate([
             'email'     => 'required|email|exists:users',
             'password'  => ['required']
-        ]));
+        ]);
 
         // Authentification
         $credentials = $request->only('email', 'password');
@@ -51,7 +51,7 @@ class CustomAuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect(route('login'));
+        return redirect(route('home'));
     }
 
     /**

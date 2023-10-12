@@ -1,29 +1,28 @@
 @extends('layouts/app')
 @section('title', 'Annuaire des étudiants')
 @section('content')
-<div class="row p-3 m-3 m-md-5 p-md-5 bg-light border rounded-3 border-2">
+<!-- Retour -->
+<div class="col-xl-8 mx-auto">
+    <a href="{{route('etudiant.index')}}" class="btn btn-outline-secondary btn-sm">← Retour</a>
+</div>
+
+<div class="col-xl-8 m-4 p-5 bg-light border rounded-3 border-2 mx-auto">
     <!-- Détail étudiant -->
-    <div class="col-lg-8">
-        <!-- Retour -->
-        <a href="{{route('etudiant.index')}}" class="btn btn-outline-secondary btn-sm">← Retour à la liste</a>
-        <h4 class="display-4 mt-5">{{ucfirst($etudiant->nom)}}</h4>
-        <ul class="list-group list-group-flush bg-warning">
-            <li class="list-group-item "><strong>Adresse:</strong> {{$etudiant->adresse}}</li>
-            <li class="list-group-item"><strong>Téléphone:</strong> {{$etudiant->telephone}}</li>
-            <li class="list-group-item"><strong>Email:</strong> {{$etudiant->email}}</li>
-            <li class="list-group-item"><strong>Date de naissance:</strong> {{$etudiant->date_naissance}}</li>
-            <li class="list-group-item"><strong>Ville:</strong> {{$etudiant->etudiantHasVille->nom}}</li>
-        </ul>
-    </div>
-
-
+    <h4 class="display-4 mb-4">{{ucfirst($etudiant->nom)}}</h4>
+    <ul class="list-group list-group-flush bg-warning">
+        <li class="list-group-item "><strong>Adresse:</strong> {{$etudiant->adresse}}</li>
+        <li class="list-group-item"><strong>Téléphone:</strong> {{$etudiant->telephone}}</li>
+        <li class="list-group-item"><strong>Email:</strong> {{$etudiant->email}}</li>
+        <li class="list-group-item"><strong>Date de naissance:</strong> {{$etudiant->date_naissance}}</li>
+        <li class="list-group-item"><strong>Ville:</strong> {{$etudiant->etudiantHasVille->nom}}</li>
+    </ul>
     @if (Auth::user()->id == $etudiant->id)
     <!-- Boutons -->
-    <div class="pt-3 col-lg-4 d-flex flex-column gap-3 justify-content-center">
-        <!-- Mise à jour -->
+    <div class="mt-4 d-flex gap-3 justify-content-center">
+        <!-- Modif -->
         <a href="{{route('etudiant.edit', $etudiant->id)}}" class="btn btn-primary">Modifier</a>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
     </div>
     @endif
 </div>
@@ -41,12 +40,12 @@
                 Voulez-vous vraiment supprimer cet étudiant ? <br>{{$etudiant->nom}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                 <!-- From -->
                 <form method="post">
                     @method('DELETE')
                     @csrf
-                    <input type="submit" value="supprimer" class="btn btn-danger">
+                    <input type="submit" value="Supprimer" class="btn btn-danger">
                 </form>
             </div>
         </div>

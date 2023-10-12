@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 // HOME
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 // AUTH
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
@@ -47,6 +47,8 @@ Route::delete('/forum/{forumPost}', [ForumPostController::class, 'destroy']);
 
 // DOCSHARE
 Route::get('/docshare', [DocFileController::class, 'index'])->name('docshare.index')->middleware('auth');
-Route::get('/docshare/{docFile}', [DocFileController::class, 'show'])->name('docshare.show')->middleware('auth');
 Route::get('/docshare-create', [DocFileController::class, 'create'])->name('docshare.create')->middleware('auth');
 Route::post('/docshare-create', [DocFileController::class, 'store']);
+Route::get('/docshare-edit/{docFile}', [DocFileController::class, 'edit'])->name('docshare.edit');
+Route::put('/docshare-edit/{docFile}', [DocFileController::class, 'update']);
+Route::delete('/docshare-edit/{docFile}', [DocFileController::class, 'destroy']);

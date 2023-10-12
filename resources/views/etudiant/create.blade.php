@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-lg-8 p-3 mx-auto">
     <!-- Retour -->
-    <a href="{{route('etudiant.index')}}" class="btn btn-outline-secondary btn-sm mb-3">← Retour à la liste</a>
+    <a href="{{route('etudiant.index')}}" class="btn btn-outline-secondary btn-sm mb-3">← Retour</a>
     <!-- Formulaire ajout -->
     <div class="card mb-5 mx-auto">
         <form method="post">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="card-footer text-center">
-                <input type="submit" class="btn btn-success">
+                <input type="submit" class="btn btn-primary" value="Ajouter">
             </div>
         </form>
     </div>

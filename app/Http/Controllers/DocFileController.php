@@ -33,32 +33,30 @@ class DocFileController extends Controller
      */
     public function store(Request $request)
     {
-        // Valider les données du formulaire
-        // $request->validate([
-        //     'title' => 'required|string|max:255',
-        //     'title_fr' => 'required|string|max:255',
-        //     'file_name' => 'required|mimes:pdf,zip,doc|max:10240', // Limite de taille à 10MB
-        // ]);
+        // Valider les données
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'title_fr' => 'nullable|string|max:255',
+            'file_name' => 'required|mimes:pdf,zip,doc|max:10240',
+        ]);
 
-        // Enregistrement du fichier
+        // Enregistrer le fichier
         $file = $request->file('file_name');
         $fileName = null;
         if ($file) {
             $fileName = date('Ymd', time()) . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('documents', $fileName, 'public');
-            // Le fichier sera stocké dans le dossier "storage/app/public/documents"
+            // Le fichier est stocké dans storage/app/public/documents
         }
 
-        // dd($fileName);
-
-        // Enregistrez les autres données dans la base de données
+        // Créer le fichier dans la bd
         $document = DocFile::create([
             'title' => $request->title,
             'title_fr' => $request->title_fr,
             'file_name' => $fileName, // Nom du fichier
             'user_id' => Auth::user()->id
         ]);
-        return redirect('docshare/' . $document->id)->withSuccess(trans('Votre document a été ajouté'));
+        return redirect('docshare')->withSuccess(trans('Votre document a été ajouté'));
     }
 
     /**
@@ -66,7 +64,7 @@ class DocFileController extends Controller
      */
     public function show(DocFile $docFile)
     {
-        return view('docshare.show', ['docFile' => $docFile]);
+        //
     }
 
     /**
@@ -74,7 +72,10 @@ class DocFileController extends Controller
      */
     public function edit(DocFile $docFile)
     {
-        //
+        if (Auth::user()->id != $docFile->user_id) {
+            return redirect(route('docshare.index'))->withError('Vous n\'avez pas le droit de modifier ce fichier');
+        }
+        return view('docshare.edit', ['docFile' => $docFile]);
     }
 
     /**
@@ -82,7 +83,37 @@ class DocFileController extends Controller
      */
     public function update(Request $request, DocFile $docFile)
     {
-        //
+        // Valider les données
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'title_fr' => 'nullable|string|max:255',
+            'new_file' => 'nullable|mimes:pdf,zip,doc|max:10240',
+        ]);
+
+        // Si un nouveau fichier est ajouté... 
+        if ($request->new_file) {
+            // ...on supprime l'ancien fichier
+            $oldFile = $docFile->file_name;
+            if ($oldFile) {
+                unlink(storage_path('app/public/documents/' . $oldFile));
+            }
+            // ...et on enregistre le nouveau
+            $file = $request->file('new_file');
+            $fileName = null;
+            if ($file) {
+                $fileName = date('Ymd', time()) . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('documents', $fileName, 'public');
+            }
+        }
+
+        // Modifier le fichier dans la bd
+        $docFile->update([
+            'title' => $request->title,
+            'title_fr' => $request->title_fr,
+            'file_name' => $request->new_file ? $fileName : $request->file_name
+        ]);
+
+        return redirect('docshare')->withSuccess(trans('Votre document a été modifié'));
     }
 
     /**
@@ -90,6 +121,10 @@ class DocFileController extends Controller
      */
     public function destroy(DocFile $docFile)
     {
-        //
+        if (Auth::user()->id != $docFile->user_id) {
+            return redirect(route('docshare.index'))->withError('Vous n\'avez pas le droit de supprimer ce fichier');
+        }
+        $docFile->delete();
+        return redirect(route('docshare.index'))->withSuccess('Document supprimé');
     }
 }

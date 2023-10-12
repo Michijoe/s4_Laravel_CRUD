@@ -12,7 +12,7 @@
 <body>
     <!-- Modale Success -->
     @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+    <div class="alert mb-0 alert-success alert-dismissible fade show text-center" role="alert">
         <strong>{{session('success')}}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -27,40 +27,47 @@
     </div>
     @endif
 
-    @guest
-    @else
+
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-md bg-light">
+        <div class="container-sm">
             <!-- on déclare la variable $locale -->
             <!-- @php $locale = session()->get('locale'); @endphp -->
 
-            <a class="navbar-brand" href="#">Hello {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    <a class="nav-link" href="{{route('home')}}">Home</a>
+                    @guest
+                    @else
                     <a class="nav-link" href="{{route('etudiant.index')}}">Student List</a>
                     <a class="nav-link" href="{{route('forum.index')}}">Forum</a>
                     <a class="nav-link" href="{{route('docshare.index')}}">Documents</a>
-                    <a class="nav-link" href="{{route('logout')}}">Logout</a>
+                    @endguest
                 </div>
             </div>
+            <a class="navbar-brand" href="#">Hello {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
+            @guest
+            <a class="nav-link" href="{{route('login')}}">Login</a>
+            @else
+            <a class="nav-link" href="{{route('logout')}}">Logout</a>
+            @endguest
         </div>
     </nav>
-    @endguest
+
+    <!-- Header -->
+    <header class="bg-dark m-0 p-4">
+        <div class="col-12 text-center">
+            <h1 class="display-4 mt-4 text-light">@yield('title')</h1>
+        </div>
+    </header>
 
     <!-- Container -->
     <div class="container">
-        <div class="row">
-            <div class="col-12 pt-2">
-                <h1 class="display-2 mt-4 text-center">@yield('title')</h1>
-                <div class="container mb-4">
-                    <hr>
-                    @yield('content')
-                </div>
-            </div>
+        <div class="col-12 pt-5 mx-auto">
+            @yield('content')
         </div>
     </div>
 
