@@ -7,7 +7,7 @@
     <a href="{{route('docshare.index')}}" class="btn btn-outline-secondary btn-sm mb-3">← Retour</a>
     <!-- Formulaire de modification -->
     <div class="card mb-5 mx-auto">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="card-header text-center text-warning">

@@ -26,6 +26,11 @@ Route::get('/', function () {
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('/login', [CustomAuthController::class, 'authentication']);
 Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
+// FORGOT PASSWORD :
+Route::get('/forgot-password', [CustomAuthController::class, 'forgotPassword'])->name('forgot.password');
+Route::post('/forgot-password', [CustomAuthController::class, 'tempPassword']);
+Route::get('/new-password/{user}/{tempPassword}', [CustomAuthController::class, 'newPassword'])->name('new.password');
+Route::post('/new-password/{user}/{tempPassword}', [CustomAuthController::class, 'storeNewPassword']);
 
 // STUDENTS
 Route::get('/etudiants', [EtudiantController::class, 'index'])->name('etudiant.index')->middleware('auth');
