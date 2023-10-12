@@ -1,5 +1,5 @@
 @extends('layouts/app')
-@section('title', 'Shared documents')
+@section('title', 'Documents partagés')
 @section('content')
 <div class="col-xl-10 mx-auto d-flex flex-column gap-4">
     <!-- Ajouter un document -->
@@ -16,9 +16,9 @@
             <table class="table table-hover align-middle">
                 <thead>
                     <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Created by</th>
-                        <th scope="col">Created date</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Auteur</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Options</th>
                     </tr>
                 </thead>
@@ -30,7 +30,7 @@
                         <td>{{$docfile->created_at}}</td>
                         <td>
                             <!-- Download -->
-                            <a href="{{ asset('storage/documents/' . $docfile->file_name) }}" download="{{ $docfile->file_name }}" class="btn btn-outline-secondary">Download</a>
+                            <a href="{{ asset('storage/documents/' . $docfile->file_name) }}" download="{{ $docfile->file_name }}" class="btn btn-outline-secondary">Télécharger</a>
                             @if (Auth::user()->id == $docfile->user_id)
                             <!-- Modifier -->
                             <a href="{{route('docshare.edit', $docfile->id)}}" class="btn btn-outline-primary">Modifier</a>

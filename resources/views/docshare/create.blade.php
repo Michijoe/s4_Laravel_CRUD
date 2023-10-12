@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Shared documents')
+@section('title', 'Documents partagés')
 @section('content')
 
 <div class="col-lg-8 p-3 mx-auto">

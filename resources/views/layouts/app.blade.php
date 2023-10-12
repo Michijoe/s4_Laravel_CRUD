@@ -39,10 +39,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="{{route('home')}}">Home</a>
+                    <a class="nav-link" href="{{route('home')}}">Accueil</a>
                     @guest
                     @else
-                    <a class="nav-link" href="{{route('etudiant.index')}}">Student List</a>
+                    <a class="nav-link" href="{{route('etudiant.index')}}">Étudiants</a>
                     <a class="nav-link" href="{{route('forum.index')}}">Forum</a>
                     <a class="nav-link" href="{{route('docshare.index')}}">Documents</a>
                     @endguest
@@ -50,9 +50,9 @@
             </div>
             <a class="navbar-brand" href="#">Hello {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
             @guest
-            <a class="nav-link" href="{{route('login')}}">Login</a>
+            <a class="nav-link" href="{{route('login')}}">Connexion</a>
             @else
-            <a class="nav-link" href="{{route('logout')}}">Logout</a>
+            <a class="nav-link" href="{{route('logout')}}">Déconnexion</a>
             @endguest
         </div>
     </nav>
