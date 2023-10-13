@@ -58,7 +58,7 @@ class DocFileController extends Controller
             'file_name' => $fileName, // Nom du fichier
             'user_id' => Auth::user()->id
         ]);
-        return redirect('docshare')->withSuccess(trans('Votre document a été ajouté'));
+        return redirect('docshare')->withSuccess(trans('modale.addDoc'));
     }
 
     /**
@@ -75,7 +75,7 @@ class DocFileController extends Controller
     public function edit(DocFile $docFile)
     {
         if (Auth::user()->id != $docFile->user_id) {
-            return redirect(route('docshare.index'))->withError('Vous n\'avez pas le droit de modifier ce fichier');
+            return redirect(route('docshare.index'));
         }
         return view('docshare.edit', ['docFile' => $docFile]);
     }
@@ -115,7 +115,7 @@ class DocFileController extends Controller
             'file_name' => $request->new_file ? $fileName : $request->file_name
         ]);
 
-        return redirect('docshare')->withSuccess(trans('Votre document a été modifié'));
+        return redirect('docshare')->withSuccess(trans('modale.updateDoc'));
     }
 
     /**
@@ -124,7 +124,7 @@ class DocFileController extends Controller
     public function destroy(DocFile $docFile)
     {
         if (Auth::user()->id != $docFile->user_id) {
-            return redirect(route('docshare.index'))->withError('Vous n\'avez pas le droit de supprimer ce fichier');
+            return redirect(route('docshare.index'));
         }
         // supprimer le fichier physique
         $filePath = storage_path('app/public/documents/' . $docFile->file_name);
@@ -134,6 +134,6 @@ class DocFileController extends Controller
         // supprimer l'entrée dans la bd
         $docFile->delete();
 
-        return redirect(route('docshare.index'))->withSuccess('Document supprimé');
+        return redirect(route('docshare.index'))->withSuccess(trans('modale.deleteDoc'));
     }
 }

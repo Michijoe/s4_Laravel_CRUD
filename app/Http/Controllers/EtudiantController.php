@@ -77,7 +77,7 @@ class EtudiantController extends Controller
         // Envoyer le mot de passe par email
         $to_name = $user->name;
         $to_email = $user->email;
-        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>Active ton compte</a>";
+        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>{{ __('Account activation') }}</a>";
         Mail::send(
             'email.activation',
             [
@@ -85,11 +85,11 @@ class EtudiantController extends Controller
                 'body' => $body
             ],
             function ($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject('Active ton compte');
+                $message->to($to_email, $to_name)->subject(trans(__('Account activation')));
             }
         );
 
-        return redirect(route('etudiant.index'))->withSuccess('Le nouvel utilisateur a reçu un lien d\'activation par courriel');
+        return redirect(route('etudiant.index'))->withSuccess(trans('passwords.activation'));
     }
 
     /**
@@ -142,7 +142,7 @@ class EtudiantController extends Controller
             'date_naissance'  => $request->date_naissance,
             'ville_id'        => $request->ville_id
         ]);
-        return redirect('etudiant/' . $etudiant->id)->withSuccess('Étudiant modifié');
+        return redirect('etudiant/' . $etudiant->id)->withSuccess(trans('modale.updateStud'));
     }
 
     /**
@@ -153,6 +153,6 @@ class EtudiantController extends Controller
         // Supprimer le user et l'étudiant avec la contrainte de clé étrangère (cascade on delete)
         $user = User::find($etudiant->id);
         $user->delete();
-        return redirect(route('etudiant.index'))->withSuccess('Étudiant supprimé');
+        return redirect(route('etudiant.index'))->withSuccess(trans('modale.deleteStud'));
     }
 }

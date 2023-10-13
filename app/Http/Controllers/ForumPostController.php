@@ -48,7 +48,7 @@ class ForumPostController extends Controller
             'body_fr'      => $request->body_fr,
             'user_id'      => Auth::user()->id
         ]);
-        return redirect('forum/' . $newPost->id)->withSuccess(trans('Votre article a été créé'));
+        return redirect('forum/' . $newPost->id)->withSuccess(trans('modale.addPost'));
     }
 
     /**
@@ -65,7 +65,7 @@ class ForumPostController extends Controller
     public function edit(ForumPost $forumPost)
     {
         if (Auth::user()->id != $forumPost->user_id) {
-            return redirect(route('forum.index'))->withError('Vous n\'avez pas le droit de modifier cet article');
+            return redirect(route('forum.index'));
         }
         return view('forum.edit', ['forumPost' => $forumPost]);
     }
@@ -90,7 +90,7 @@ class ForumPostController extends Controller
             'body'      => $request->body,
             'body_fr'   => $request->body_fr
         ]);
-        return redirect('forum/' . $forumPost->id)->withSuccess('Article modifié');
+        return redirect('forum/' . $forumPost->id)->withSuccess(trans('modale.updatePost'));
     }
 
     /**
@@ -99,9 +99,9 @@ class ForumPostController extends Controller
     public function destroy(ForumPost $forumPost)
     {
         if (Auth::user()->id != $forumPost->user_id) {
-            return redirect(route('forum.index'))->withError('Vous n\'avez pas le droit de supprimer cet article');
+            return redirect(route('forum.index'));
         }
         $forumPost->delete();
-        return redirect(route('forum.index'))->withSuccess('Article supprimé');
+        return redirect(route('forum.index'))->withSuccess(trans('modale.deletePost'));
     }
 }

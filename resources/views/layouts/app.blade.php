@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- variable $locale -->
+@php $locale = session()->get('locale'); @endphp
+<html lang="{{$locale}}">
 
 <head>
     <meta charset="UTF-8">
@@ -31,9 +33,6 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md bg-light">
         <div class="container-sm">
-            <!-- variable $locale -->
-            @php $locale = session()->get('locale'); @endphp
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

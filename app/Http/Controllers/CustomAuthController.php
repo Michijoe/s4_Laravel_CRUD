@@ -88,7 +88,7 @@ class CustomAuthController extends Controller
         // envoi du courriel
         $to_name = $user->name;
         $to_email = $user->email;
-        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>Réinitialisation</a>";
+        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>{{ __('Password reset') }}</a>";
         Mail::send(
             'email.reinit',
             [
@@ -96,11 +96,11 @@ class CustomAuthController extends Controller
                 'body' => $body
             ],
             function ($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject('Réinitialise ton mot de passe');
+                $message->to($to_email, $to_name)->subject(trans(__('Password reset')));
             }
         );
 
-        return redirect(route('login'))->withSuccess('Un lien pour réinitialiser ton mot de passe a été envoyé par courriel');
+        return redirect(route('login'))->withSuccess(trans('passwords.sent'));
     }
 
     /**
@@ -110,7 +110,7 @@ class CustomAuthController extends Controller
     {
         // vérifier que le mot de passe temporaire est le bon
         if ($user->temp_password != $tempPassword) :
-            return redirect(route('forgot.password'))->withErrors('Le lien est invalide');
+            return redirect(route('forgot.password'))->withErrors(trans('passwords.link'));
         endif;
 
         // si le mot de passe temporaire est le bon, on affiche le formulaire de création d'un nouveau mot de passe
@@ -124,7 +124,7 @@ class CustomAuthController extends Controller
     {
         // valider que le mot de passe temporaire est le bon. On revalide que le tempassword dans l'url est le bon et qu'il n'y a pas eu de modif entre le get et le post
         if ($user->temp_password != $tempPassword) :
-            return redirect(route('forgot.password'))->withErrors('Le lien est invalide');
+            return redirect(route('forgot.password'))->withErrors(trans('passwords.link'));
         endif;
 
         // valider le formulaire
@@ -138,7 +138,7 @@ class CustomAuthController extends Controller
         $user->save();
 
         // rediriger vers la page de login
-        return redirect(route('login'))->withSuccess('Votre mot de passe a été modifié');
+        return redirect(route('login'))->withSuccess(trans('passwords.modifPassword'));
     }
 
 
