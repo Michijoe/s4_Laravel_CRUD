@@ -1,24 +1,24 @@
 @extends('layouts/app')
-@section('title', 'Forum')
+@section('title', __('Forum'))
 @section('content')
 <div class="col-xl-10 mx-auto d-flex flex-column gap-4">
     <!-- Ajouter un post -->
     <div class="text-center">
-        <a href="{{route('forum.create')}}" class="btn btn-warning">Ajouter un article</a>
+        <a href="{{route('forum.create')}}" class="btn btn-warning">{{ __('Add a post') }}</a>
     </div>
 
     <!-- Liste des articles -->
     <div class="card">
         <div class="card-header text-center">
-            <h4>Liste des articles</h4>
+            <h4>{{ __('List of posts') }}</h4>
         </div>
         <div class="card-body table-responsive text-left">
             <table class="table table-hover align-middle">
                 <thead>
                     <tr>
-                        <th scope="col">Titre</th>
-                        <th scope="col">Auteur</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">{{ __('Title') }}</th>
+                        <th scope="col">{{ __('Author') }}</th>
+                        <th scope="col">{{ __('Date') }}</th>
                     </tr>
                 </thead>
                 <tbody class="float-left">
@@ -29,7 +29,7 @@
                         <td>{{$post->created_at}}</td>
                     </tr>
                     @empty
-                    <li><em>Pas d'article pour le moment</em></li>
+                    <li><em>{{ __('No posts at the moment') }}</em></li>
                     @endforelse
                 </tbody>
             </table>

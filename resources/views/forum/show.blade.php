@@ -1,23 +1,23 @@
 @extends('layouts/app')
-@section('title', 'Forum')
+@section('title', __('Forum'))
 @section('content')
 <!-- Retour -->
 <div class="col-xl-8 mx-auto">
-    <a href="{{route('forum.index')}}" class="btn btn-outline-secondary btn-sm">← Retour</a>
+    <a href="{{route('forum.index')}}" class="btn btn-outline-secondary btn-sm">← {{ __('Back') }}</a>
 </div>
 <!-- Détail article -->
 <div class="col-xl-8 m-4 mx-auto">
     <h4 class="display-4 mb-4">{{ucfirst($forumPost->title)}}</h4>
-    <p><strong>Auteur:</strong> {{$forumPost->postHasUser->name}}</p>
+    <p><strong>{{ __('Author') }}:</strong> {{$forumPost->postHasUser->name}}</p>
     <p><strong>Date:</strong> {{$forumPost->created_at}}</p>
     <p class="mt-3">{!! $forumPost->body !!}</p>
     <!-- Boutons -->
     @if (Auth::user()->id == $forumPost->user_id)
     <div class="mt-4 d-flex gap-3 justify-content-center">
         <!-- Modif -->
-        <a href="{{route('forum.edit', $forumPost->id)}}" class="btn btn-primary">Modifier</a>
+        <a href="{{route('forum.edit', $forumPost->id)}}" class="btn btn-primary">{{ __('Update') }}</a>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">{{ __('Delete') }}</button>
     </div>
     @endif
 </div>
@@ -27,19 +27,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Attention</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ __('Attention') }}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Voulez-vous vraiment supprimer cet article ? <br>{{$forumPost->title}}
+                {{ __('Are you sure you want to delete this post?') }}<br>{{$forumPost->title}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
                 <!-- From -->
                 <form method="post">
                     @method('DELETE')
                     @csrf
-                    <input type="submit" value="supprimer" class="btn btn-danger">
+                    <input type="submit" value="{{ __('Delete') }}" class="btn btn-danger">
                 </form>
             </div>
         </div>

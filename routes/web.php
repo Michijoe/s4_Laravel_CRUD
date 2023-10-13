@@ -4,6 +4,7 @@ use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ForumPostController;
 use App\Http\Controllers\DocFileController;
+use App\Http\Controllers\LocalizationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+// LOCALIZATION
+Route::get('/lang/{locale}', [LocalizationController::class, 'index'])->name('lang');
 
 // AUTH
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Se connecter')
+@section('title', __('Login'))
 @section('content')
 
 <div class="col-lg-6 p-3 mx-auto">
@@ -9,17 +9,17 @@
             @csrf
             <div class="card-body">
                 <div class="control-group col-12">
-                    <label for="email">Email</label>
+                    <label for="email">{{ __('Email') }}</label>
                     <input type="email" id="email" name="email" class="form-control" value="{{old('email')}}">
                 </div>
                 <div class="control-group col-12">
-                    <label for="password">Password</label>
+                    <label for="password">{{ __('Password') }}</label>
                     <input type="password" id="password" name="password" class="form-control">
                 </div>
             </div>
-            <div class="card-footer">
-                <input type="submit" class="btn btn-success" value="Connexion">
-                <a href="{{route('forgot.password')}}" class="text-danger mb-3">Forgot password</a>
+            <div class="card-footer text-center">
+                <input type="submit" class="btn btn-primary" value="{{ __('Login') }}">
+                <a href="{{route('forgot.password')}}" class="text-decoration-none mt-1 d-block">{{ __('Forgot password?') }}</a>
             </div>
         </form>
     </div>

@@ -31,32 +31,35 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md bg-light">
         <div class="container-sm">
-            <!-- on déclare la variable $locale -->
-            <!-- @php $locale = session()->get('locale'); @endphp -->
+            <!-- variable $locale -->
+            @php $locale = session()->get('locale'); @endphp
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="{{route('home')}}">Accueil</a>
+                    <a class="nav-link" href="{{route('home')}}">{{ __('Home') }}</a>
                     @guest
                     @else
-                    <a class="nav-link" href="{{route('etudiant.index')}}">Étudiants</a>
-                    <a class="nav-link" href="{{route('forum.index')}}">Forum</a>
-                    <a class="nav-link" href="{{route('docshare.index')}}">Documents</a>
+                    <a class="nav-link" href="{{route('etudiant.index')}}">{{ __('Students') }}</a>
+                    <a class="nav-link" href="{{route('forum.index')}}">{{ __('Forum') }}</a>
+                    <a class="nav-link" href="{{route('docshare.index')}}">{{ __('Documents') }}</a>
                     @endguest
                 </div>
             </div>
             @guest
             @else
-            <a class="navbar-brand" href="#">Bonjour {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
+            <a class="navbar-brand" href="#">{{ __('Hello') }} {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
             @endguest
             @guest
-            <a class="nav-link" href="{{route('login')}}">Connexion</a>
+            <a class="nav-link" href="{{route('login')}}">{{ __('Login') }}</a>
             @else
-            <a class="nav-link" href="{{route('logout')}}">Déconnexion</a>
+            <a class="nav-link" href="{{route('logout')}}">{{ __('Logout') }}</a>
             @endguest
+            <!-- Localization -->
+            <a class="nav-link @if($locale=='en') text-primary @endif" href="{{route('lang', 'en')}}">EN</a>
+            <a class="nav-link @if($locale=='fr') text-primary @endif" href="{{route('lang', 'fr')}}">FR</a>
         </div>
     </nav>
 

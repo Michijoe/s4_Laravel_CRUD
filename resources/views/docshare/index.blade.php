@@ -1,25 +1,25 @@
 @extends('layouts/app')
-@section('title', 'Documents partagés')
+@section('title', __('Shared documents'))
 @section('content')
 <div class="col-xl-10 mx-auto d-flex flex-column gap-4">
     <!-- Ajouter un document -->
     <div class="text-center">
-        <a href="{{route('docshare.create')}}" class="btn btn-warning">Ajouter un document</a>
+        <a href="{{route('docshare.create')}}" class="btn btn-warning">{{ __('Add a document') }}</a>
     </div>
 
     <!-- Liste des articles -->
     <div class="card">
         <div class="card-header text-center">
-            <h4>Liste des documents</h4>
+            <h4>{{ __('List of documents') }}</h4>
         </div>
         <div class="card-body table-responsive text-start">
             <table class="table table-hover align-middle">
                 <thead>
                     <tr>
-                        <th scope="col">Titre</th>
-                        <th scope="col">Auteur</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Options</th>
+                        <th scope="col">{{ __('Title') }}</th>
+                        <th scope="col">{{ __('Author') }}</th>
+                        <th scope="col">{{ __('Date') }}</th>
+                        <th scope="col">{{ __('Options') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,15 +30,15 @@
                         <td>{{$docfile->created_at}}</td>
                         <td>
                             <!-- Download -->
-                            <a href="{{ asset('storage/documents/' . $docfile->file_name) }}" download="{{ $docfile->file_name }}" class="btn btn-outline-secondary">Télécharger</a>
+                            <a href="{{ asset('storage/documents/' . $docfile->file_name) }}" download="{{ $docfile->file_name }}" class="btn btn-outline-secondary">{{ __('Download') }}</a>
                             @if (Auth::user()->id == $docfile->user_id)
                             <!-- Modifier -->
-                            <a href="{{route('docshare.edit', $docfile->id)}}" class="btn btn-outline-primary">Modifier</a>
+                            <a href="{{route('docshare.edit', $docfile->id)}}" class="btn btn-outline-primary">{{ __('Update') }}</a>
                             @endif
                         </td>
                     </tr>
                     @empty
-                    <p>Pas de document pour le moment</p>
+                    <p>{{ __('No documents at the moment') }}</p>
                     @endforelse
                 </tbody>
             </table>

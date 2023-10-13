@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activation de compte</title>
+    <title>{{ __('Account activation') }}</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -29,10 +29,10 @@
 </head>
 
 <body>
-    <h2>Bienvenue sur le réseau social du collège de Maisonneuve !</h2>
-    <p><strong>{{$name}}</strong>, vous venez d'être invité(e) à rejoindre notre plateforme.</p>
+    <h2>@lang('content.email_activation')</h2>
+    <p><strong>{{$name}}</strong>@lang('content.email_activation_body')</p>
     <button>{!!$body!!}</button>
-    <p><em>L'équipe sociale du collège de Maisonneuve.</em></p>
+    <p><em>@lang('content.email_signature')</em></p>
 </body>
 
 </html>
