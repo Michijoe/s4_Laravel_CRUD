@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DocFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 class DocFileController extends Controller
@@ -44,9 +45,10 @@ class DocFileController extends Controller
         $file = $request->file('file_name');
         $fileName = null;
         if ($file) {
-            $fileName = date('Ymd', time()) . '_' . $file->getClientOriginalName();
+            // Générer un nom de fichier unique
+            $fileName = date('Ymd', time()) . '_' . str::random(45) . '.' . $file->getClientOriginalExtension();
+            // Stocker le fichier dans storage/app/public/documents
             $filePath = $file->storeAs('documents', $fileName, 'public');
-            // Le fichier est stocké dans storage/app/public/documents
         }
 
         // Créer le fichier dans la bd
@@ -101,7 +103,7 @@ class DocFileController extends Controller
             $file = $request->file('new_file');
             $fileName = null;
             if ($file) {
-                $fileName = date('Ymd', time()) . '_' . $file->getClientOriginalName();
+                $fileName = date('Ymd', time()) . '_' . str::random(45) . '.' . $file->getClientOriginalExtension();
                 $filePath = $file->storeAs('documents', $fileName, 'public');
             }
         }
@@ -124,7 +126,14 @@ class DocFileController extends Controller
         if (Auth::user()->id != $docFile->user_id) {
             return redirect(route('docshare.index'))->withError('Vous n\'avez pas le droit de supprimer ce fichier');
         }
+        // supprimer le fichier physique
+        $filePath = storage_path('app/public/documents/' . $docFile->file_name);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+        // supprimer l'entrée dans la bd
         $docFile->delete();
+
         return redirect(route('docshare.index'))->withSuccess('Document supprimé');
     }
 }
