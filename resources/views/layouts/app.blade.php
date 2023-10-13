@@ -48,7 +48,10 @@
                     @endguest
                 </div>
             </div>
-            <a class="navbar-brand" href="#">Hello {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
+            @guest
+            @else
+            <a class="navbar-brand" href="#">Bonjour {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
+            @endguest
             @guest
             <a class="nav-link" href="{{route('login')}}">Connexion</a>
             @else
