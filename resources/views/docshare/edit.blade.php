@@ -14,25 +14,37 @@
                 <h1 class="display-5">Modifier un fichier</h1>
             </div>
             <div class="card-body">
-                <div class="control-group col-12">
-                    <label for="title">Titre</label>
-                    <input type="text" id="title" name="title" class="form-control" value="{{$docFile->title}}" required>
-                </div>
-                <div class="control-group col-12">
-                    <label for="title_fr">Titre en français (optionnel)</label>
-                    <input type="text" id="title_fr" name="title_fr" class="form-control" value="{{$docFile->title_fr}}">
-                </div>
-                <div class="control-group col-12">
-                    <label for="file">Nom du fichier actuel</label>
-                    <input type="text" id="file" class="form-control" name="file_name" value="{{ $docFile->file_name }}" readonly>
-                </div>
-                <div class="control-group col-12">
-                    <label for="new_file">Remplacer le fichier</label>
-                    <input type="file" id="new_file" name="new_file" accept=".pdf, .zip, .doc" class="form-control">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-en-tab" data-bs-toggle="tab" data-bs-target="#nav-en" type="button" role="tab" aria-controls="nav-en" aria-selected="true">Anglais</button>
+                        <button class="nav-link" id="nav-fr-tab" data-bs-toggle="tab" data-bs-target="#nav-fr" type="button" role="tab" aria-controls="nav-fr" aria-selected="false">Français</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-en" role="tabpanel" aria-labelledby="nav-en-tab" tabindex="0">
+                        <div class="control-group col-12">
+                            <label for="title">Titre</label>
+                            <input type="text" id="title" name="title" class="form-control" value="{{$docFile->title}}" required>
+                        </div>
+                        <div class="control-group col-12">
+                            <label for="file">Nom du fichier actuel</label>
+                            <input type="text" id="file" class="form-control" name="file_name" value="{{ $docFile->file_name }}" readonly>
+                        </div>
+                        <div class="control-group col-12">
+                            <label for="new_file">Remplacer le fichier</label>
+                            <input type="file" id="new_file" name="new_file" accept=".pdf, .zip, .doc" class="form-control">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-fr" role="tabpanel" aria-labelledby="nav-fr-tab" tabindex="0">
+                        <div class="control-group col-12">
+                            <label for="title_fr">Titre en français (optionnel)</label>
+                            <input type="text" id="title_fr" name="title_fr" value="{{$docFile->title_fr}}" class="form-control">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer text-center">
-                <input type="submit" class="btn btn-primary">
+                <input type="submit" class="btn btn-primary" value="Modifier">
                 <!-- Supprimer -->
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
             </div>
