@@ -8,6 +8,7 @@
     <li><a href="#-features">Features</a></li>
     <li><a href="#-command-lines">Command lines</a></li>
     <li><a href="#-built-with">Built with</a></li>
+    <li><a href="#-screenshot">Screenshot</a></li>
   </ol>
 </details>
 
@@ -98,3 +99,6 @@ Les étudiants sont invités à créer du contenu dans les deux langues, l'angla
 
 ## 🤖 Built With
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white) ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white) ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+
+## 🌐 Screenshot
+![Forum](./screenshot_forum.png)
