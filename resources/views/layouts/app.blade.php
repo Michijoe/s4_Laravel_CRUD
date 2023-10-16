@@ -11,7 +11,7 @@
     <title>{{ config('app.name') }} - @yield('title')</title>
 </head>
 
-<body>
+<body class="d-flex flex-column vh-100">
     <!-- Modale Success -->
     @if(session('success'))
     <div class="alert mb-0 alert-success alert-dismissible fade show text-center" role="alert">
@@ -28,8 +28,6 @@
         @endforeach
     </div>
     @endif
-
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md bg-light">
         <div class="container-sm">
@@ -76,7 +74,7 @@
     </header>
 
     <!-- Container -->
-    <div class="container pb-3">
+    <div class="container pb-3 flex-grow-1">
         <div class="col-12 pt-5 mx-auto">
             @yield('content')
         </div>
@@ -86,7 +84,6 @@
     <footer class="py-3 mt-5 bg-dark">
         <p class="text-center text-light pt-3">© 2023 NewLodge&nbsp;College</p>
     </footer>
-
 </body>
 <!-- Bootstrap js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
