@@ -5,8 +5,8 @@
   <summary>🏁 Sommaire</summary>
   <ol>
     <li><a href="#-intro">Intro</a></li>
-    <li><a href="#-command-lines">Command lines</a></li>
     <li><a href="#-features">Features</a></li>
+    <li><a href="#-command-lines">Command lines</a></li>
     <li><a href="#-built-with">Built with</a></li>
   </ol>
 </details>
@@ -29,42 +29,6 @@ Les étudiants sont invités à créer du contenu dans les deux langues, l'angla
 - mdp : Maisonneuve!1234
 
 Lien vers l'application : [NewLodge College Network](https://network.johannapenet.com/)
-
-
-## 🚀 Command lines
-
-- Création du projet
-`composer create-project --prefer-dist laravel/laravel Maisonneuve2296540`
-
-- Création des modèles
-`php artisan make:model Etudiant -m`
-`php artisan make:model Ville -m`
-`php artisan make:model ForumPost -m`
-`php artisan make:model DocFile -m`
-
-- Création des tables
-`php artisan migrate`
-
-- Génération de données de tests (15 villes, 100 étudiants, 20 articles)
-`php artisan make:factory VilleFactory`
-`php artisan make:factory EtudiantFactory`
-`php artisan make:factory ForumPostFactory`
-`php artisan tinker`
-`\App\Models\Ville::factory()->times(15)->create()`
-`\App\Models\Etudiant::factory()->times(100)->create()`
-`\App\Models\ForumPost::factory()->times(20)->create()`
-
-- Création des controllers
-`php artisan make:controller EtudiantController -m Etudiant`
-`php artisan make:controller CustomAuthController -m User`
-`php artisan make:controller ForumPostController -m ForumPost`
-`php artisan make:controller DocFileController -m DocFile`
-`php artisan make:controller LocalizationController`
-
-- Création du dossier lang et du middleware multilangue
-`php artisan lang:publish`
-`php artisan make:middleware Localization`
-
 
 ## 🎯 Features
 
@@ -98,6 +62,39 @@ Lien vers l'application : [NewLodge College Network](https://network.johannapene
 - Télécharger un fichier
 - Modifier et supprimer un fichier (quand l'auteur est l'utilisateur connecté)
 
+## 🚀 Command lines
+
+*Création du projet*
+`composer create-project --prefer-dist laravel/laravel Maisonneuve2296540`
+
+*Création des modèles*
+  `php artisan make:model Etudiant -m`
+  `php artisan make:model Ville -m`
+  `php artisan make:model ForumPost -m`
+  `php artisan make:model DocFile -m`
+
+*Création des tables*
+`php artisan migrate`
+
+*Génération de données de tests (15 villes, 100 étudiants, 20 articles)*
+`php artisan make:factory VilleFactory`
+`php artisan make:factory EtudiantFactory`
+`php artisan make:factory ForumPostFactory`
+`php artisan tinker`
+`\App\Models\Ville::factory()->times(15)->create()`
+`\App\Models\Etudiant::factory()->times(100)->create()`
+`\App\Models\ForumPost::factory()->times(20)->create()`
+
+*Création des controllers*
+`php artisan make:controller EtudiantController -m Etudiant`
+`php artisan make:controller CustomAuthController -m User`
+`php artisan make:controller ForumPostController -m ForumPost`
+`php artisan make:controller DocFileController -m DocFile`
+`php artisan make:controller LocalizationController`
+
+*Création du dossier lang et du middleware multilangue*
+`php artisan lang:publish`
+`php artisan make:middleware Localization`
 
 ## 🤖 Built With
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white) ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white) ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
