@@ -1,4 +1,4 @@
-# Annuaire étudiants - Laravel CRUD
+# Plateforme de partage étudiants - Laravel CRUD
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -13,50 +13,91 @@
 
 ## ⚡ Intro
 
-Le mandat est de créer un site Internet pour recueillir de l'information auprès des étudiants du Collège Maisonneuve, et possiblement à l'avenir, de construire un réseau social pour eux.
-La première étape consiste à rassembler les informations, remplir la base de données avec des données aléatoires et créer les interfaces fonctionnelles pour visualiser, saisir, mettre à jour et supprimer les étudiants,
+Création d'une application web avec Laravel et SQL qui propose aux étudiants d'un collège un espace virtuel pour partager de l'information et des documents.
 
-Lien vers le projet sur webdev : [webdev](https://e2296540.webdev.cmaisonneuve.qc.ca/annuaire/)
+Un étudiant inscrit sur la plateforme doit se connecter à son compte pour accéder au contenu.
+Chaque étudiant connecté peut ajouter un nouvel étudiant qui recevra un courriel d'activation de compte.
+Une fois connecté, un étudiant peut accéder à la liste de tous les étudiants et de leurs informations, à tous les articles et à tous les fichiers partagés.
+Un étudiant peut modifier ou supprimer ses propres informations, ainsi que les articles qu'il a rédigés et les fichiers qu'il a partagés.
+
+La plateforme est multilingue, anglais (par défaut) et français.
+Tout le contenu du site peut être affiché en anglais ou en français. 
+Les étudiants sont invités à créer du contenu dans les deux langues, l'anglais est obligatoire et le français est optionnel.
+
+**Testez l'application avec un utilisateur par défaut**
+- courriel : tbins@example.com
+- mdp : Maisonneuve!1234
+
+Lien vers l'application : [NewLodge College Network](https://network.johannapenet.com/)
+
 
 ## 🚀 Command lines
 
 - Création du projet
-
 `composer create-project --prefer-dist laravel/laravel Maisonneuve2296540`
 
 - Création des modèles
-
 `php artisan make:model Etudiant -m`
 `php artisan make:model Ville -m`
+`php artisan make:model ForumPost -m`
+`php artisan make:model DocFile -m`
 
 - Création des tables
-
 `php artisan migrate`
 
-- Saisie de 15 nouvelles villes
-
+- Génération de données de tests (15 villes, 100 étudiants, 20 articles)
 `php artisan make:factory VilleFactory`
+`php artisan make:factory EtudiantFactory`
+`php artisan make:factory ForumPostFactory`
 `php artisan tinker`
 `\App\Models\Ville::factory()->times(15)->create()`
-
-- Saisie de 100 nouveaux étudiants
-
-`php artisan make:factory EtudiantFactory`
-`php artisan tinker`
 `\App\Models\Etudiant::factory()->times(100)->create()`
+`\App\Models\ForumPost::factory()->times(20)->create()`
 
-- Création d'un controller
-
+- Création des controllers
 `php artisan make:controller EtudiantController -m Etudiant`
+`php artisan make:controller CustomAuthController -m User`
+`php artisan make:controller ForumPostController -m ForumPost`
+`php artisan make:controller DocFileController -m DocFile`
+`php artisan make:controller LocalizationController`
+
+- Création du dossier lang et du middleware multilangue
+`php artisan lang:publish`
+`php artisan make:middleware Localization`
+
 
 ## 🎯 Features
 
-1. Afficher tous les étudiants
-2. Naviguer dans la liste grâce à une pagination
-3. Ajouter un nouvel étudiant à la liste
-4. Afficher le détail d'un étudiant
-5. Modifier les informations d'un étudiant
-6. Supprimer un étudiant
+#### Login
+- Se connecter à son compte
+- Réinitialiser son mot de passe
+- Création d'un nouveau mot de passe à partir du lien d'activation
+- Se déconnecter
+
+#### Choix de langue
+- Choisir l'affichage en anglais ou en français
+
+#### Liste des étudiants
+- Afficher tous les étudiants
+- Naviguer dans la liste grâce à une pagination
+- Créer un nouvel étudiant
+- Afficher le détail d'un étudiant
+- Modifier et supprimer les informations de l'étudiant connecté
+
+#### Liste des articles
+- Afficher tous les articles
+- Naviguer dans la liste grâce à une pagination
+- Créer un nouvel article
+- Afficher le détail d'un article
+- Modifier et supprimer un article (quand l'auteur est l'utilisateur connecté)
+
+#### Liste des fichiers
+- Afficher tous les fichiers
+- Naviguer dans la liste grâce à une pagination
+- Déposer un nouveau fichier
+- Télécharger un fichier
+- Modifier et supprimer un fichier (quand l'auteur est l'utilisateur connecté)
+
 
 ## 🤖 Built With
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white) ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white) ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)

@@ -34,7 +34,7 @@
             <div class="navbar-nav me-auto gap-0">
                 @guest
                 @else
-                <a class="navbar-brand" href="#">{{ __('Hello') }} {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
+                <a class="navbar-brand" href="{{route('home')}}">{{ __('Hello') }} {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
                 @endguest
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
