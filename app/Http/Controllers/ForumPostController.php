@@ -13,7 +13,7 @@ class ForumPostController extends Controller
      */
     public function index()
     {
-        $posts = ForumPost::forumPostSelect();
+        $posts = ForumPost::forumPostSelect()->paginate(10);
         return view('forum.index', ['posts' => $posts]);
     }
 

@@ -14,8 +14,7 @@ class DocFileController extends Controller
      */
     public function index()
     {
-        $docfiles = DocFile::fileSelect();
-        // ->paginate(10);
+        $docfiles = DocFile::fileSelect()->paginate(10);
         return view('docshare.index', ['docfiles' => $docfiles]);
     }
 

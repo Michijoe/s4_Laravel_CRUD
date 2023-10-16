@@ -32,9 +32,9 @@
                 </tbody>
             </table>
         </div>
-        <!-- <div class="card-footer">
+        <div class="card-footer">
             {{$posts}}
-        </div> -->
+        </div>
     </div>
 </div>
 @endsection
