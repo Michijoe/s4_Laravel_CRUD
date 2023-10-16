@@ -11,7 +11,7 @@
     <title>{{ config('app.name') }} - @yield('title')</title>
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column min-vh-100">
     <!-- Modale Success -->
     @if(session('success'))
     <div class="alert mb-0 alert-success alert-dismissible fade show text-center" role="alert">
