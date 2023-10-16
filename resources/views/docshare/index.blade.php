@@ -3,15 +3,13 @@
 @section('content')
 <div class="col-xl-10 mx-auto d-flex flex-column gap-4">
     <!-- Ajouter un document -->
-    <div class="text-center">
+    <div class="d-flex align-items-start justify-content-between">
+        <h2>{{ __('List of documents') }}</h2>
         <a href="{{route('docshare.create')}}" class="btn btn-warning">{{ __('Add a document') }}</a>
     </div>
 
     <!-- Liste des articles -->
     <div class="card">
-        <div class="card-header text-center">
-            <h4>{{ __('List of documents') }}</h4>
-        </div>
         <div class="card-body table-responsive text-start">
             <table class="table table-hover align-middle">
                 <thead>
@@ -27,7 +25,7 @@
                     <tr>
                         <td>{{ucfirst($docfile->title)}}</td>
                         <td>{{$docfile->fileHasUser->name}}</td>
-                        <td>{{$docfile->created_at}}</td>
+                        <td>{{$docfile->created_at->format('Y-m-d')}}</td>
                         <td>
                             <!-- Download -->
                             <a href="{{ asset('storage/documents/' . $docfile->file_name) }}" download="{{ $docfile->file_name }}" class="btn btn-outline-secondary">{{ __('Download') }}</a>

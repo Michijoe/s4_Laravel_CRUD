@@ -77,7 +77,7 @@ class EtudiantController extends Controller
         // Envoyer le mot de passe par email
         $to_name = $user->name;
         $to_email = $user->email;
-        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>{{ __('Account activation') }}</a>";
+        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>" . trans(__('Account activation')) . "</a>";
         Mail::send(
             'email.activation',
             [

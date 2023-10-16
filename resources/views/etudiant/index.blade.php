@@ -3,15 +3,13 @@
 @section('content')
 <div class="col-xl-10 mx-auto d-flex flex-column gap-4 text-center">
     <!-- Ajouter un étudiant -->
-    <div class="text-center">
+    <div class="d-flex align-items-start justify-content-between">
+        <h2>{{ __('List of students') }}</h2>
         <a href="{{route('etudiant.create')}}" class="btn btn-warning btn-block">{{ __('Add a student') }}</a>
     </div>
 
     <!-- Liste des étudiants -->
     <div class="card">
-        <div class="card-header">
-            <h4>{{ __('List of students') }}</h4>
-        </div>
         <div class="card-body">
             <ul class="list-group">
                 @forelse($etudiants as $etudiant)

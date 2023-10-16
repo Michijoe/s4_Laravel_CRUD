@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-
 class DocFileController extends Controller
 {
     /**
@@ -15,9 +14,8 @@ class DocFileController extends Controller
      */
     public function index()
     {
-        $docfiles = DocFile::Select()
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        $docfiles = DocFile::fileSelect();
+        // ->paginate(10);
         return view('docshare.index', ['docfiles' => $docfiles]);
     }
 

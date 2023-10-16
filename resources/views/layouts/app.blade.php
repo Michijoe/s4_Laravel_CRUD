@@ -33,10 +33,16 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md bg-light">
         <div class="container-sm">
+            <div class="navbar-nav me-auto gap-0">
+                @guest
+                @else
+                <a class="navbar-brand" href="#">{{ __('Hello') }} {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
+                @endguest
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse flex-grow-0" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="{{route('home')}}">{{ __('Home') }}</a>
                     @guest
@@ -46,35 +52,40 @@
                     <a class="nav-link" href="{{route('docshare.index')}}">{{ __('Documents') }}</a>
                     @endguest
                 </div>
+                <div class="navbar-nav">
+                    @guest
+                    <a class="nav-link" href="{{route('login')}}">{{ __('Login') }}</a>
+                    @else
+                    <a class="nav-link" href="{{route('logout')}}">{{ __('Logout') }}</a>
+                    @endguest
+                    <!-- Localization -->
+                    <select class="form-select w-auto bg-light border-0 text-muted" data-width="auto" aria-label="Default select example" onchange="window.location.href=this.value">
+                        <option value="{{route('lang', 'en')}}" @if($locale=='en' ) selected @endif>EN</option>
+                        <option value="{{route('lang', 'fr')}}" @if($locale=='fr' ) selected @endif>FR</option>
+                    </select>
+                </div>
             </div>
-            @guest
-            @else
-            <a class="navbar-brand" href="#">{{ __('Hello') }} {{Auth::user() ? Auth::user()->name : 'Guest'}}</a>
-            @endguest
-            @guest
-            <a class="nav-link" href="{{route('login')}}">{{ __('Login') }}</a>
-            @else
-            <a class="nav-link" href="{{route('logout')}}">{{ __('Logout') }}</a>
-            @endguest
-            <!-- Localization -->
-            <a class="nav-link @if($locale=='en') text-primary @endif" href="{{route('lang', 'en')}}">EN</a>
-            <a class="nav-link @if($locale=='fr') text-primary @endif" href="{{route('lang', 'fr')}}">FR</a>
         </div>
     </nav>
 
     <!-- Header -->
     <header class="bg-dark m-0 p-4">
         <div class="col-12 text-center">
-            <h1 class="display-4 mt-4 text-light">@yield('title')</h1>
+            <h1 class="display-4 py-3 text-light">@yield('title')</h1>
         </div>
     </header>
 
     <!-- Container -->
-    <div class="container">
+    <div class="container pb-3">
         <div class="col-12 pt-5 mx-auto">
             @yield('content')
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="py-3 mt-5 bg-dark">
+        <p class="text-center text-light pt-3">© 2023 NewLodge&nbsp;College</p>
+    </footer>
 
 </body>
 <!-- Bootstrap js -->

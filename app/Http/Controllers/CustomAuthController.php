@@ -88,7 +88,7 @@ class CustomAuthController extends Controller
         // envoi du courriel
         $to_name = $user->name;
         $to_email = $user->email;
-        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>{{ __('Password reset') }}</a>";
+        $body = "<a href='" . route('new.password', [$user->id, $tempPassword]) . "'>" . trans(__('Password reset')) . "</a>";
         Mail::send(
             'email.reinit',
             [

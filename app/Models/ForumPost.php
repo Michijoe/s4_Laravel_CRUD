@@ -28,4 +28,10 @@ class ForumPost extends Model
         $lang = session()->get('localeDB');
         return ForumPost::select('id', DB::raw("CASE WHEN title$lang IS NULL THEN title ELSE title$lang END as title"), DB::raw("CASE WHEN body$lang IS NULL THEN body ELSE body$lang END as body"), 'user_id', 'created_at', 'updated_at')->orderBy('created_at', 'desc')->get();
     }
+
+    static public function forumPostSelectOne($forumPost)
+    {
+        $lang = session()->get('localeDB');
+        return ForumPost::select('id', DB::raw("CASE WHEN title$lang IS NULL THEN title ELSE title$lang END as title"), DB::raw("CASE WHEN body$lang IS NULL THEN body ELSE body$lang END as body"), 'user_id', 'created_at', 'updated_at')->where('id', $forumPost->id)->first();
+    }
 }

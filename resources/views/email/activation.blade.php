@@ -11,8 +11,7 @@
         }
 
         button {
-            background-color: #0d6efd;
-            border: none;
+            border: #0d6efd;
             border-radius: 5px;
             color: #fff;
             padding: 15px 32px;
@@ -21,7 +20,6 @@
         }
 
         a {
-            color: #fff;
             text-decoration: none;
             font-size: 16px;
         }

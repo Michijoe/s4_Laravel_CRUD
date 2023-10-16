@@ -13,9 +13,7 @@ class ForumPostController extends Controller
      */
     public function index()
     {
-        $posts = ForumPost::Select()
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        $posts = ForumPost::forumPostSelect();
         return view('forum.index', ['posts' => $posts]);
     }
 
@@ -56,6 +54,7 @@ class ForumPostController extends Controller
      */
     public function show(ForumPost $forumPost)
     {
+        $forumPost = ForumPost::forumPostSelectOne($forumPost);
         return view('forum.show', ['forumPost' => $forumPost]);
     }
 
