@@ -60,3 +60,4 @@ Route::post('/docshare-create', [DocFileController::class, 'store']);
 Route::get('/docshare-edit/{docFile}', [DocFileController::class, 'edit'])->name('docshare.edit');
 Route::put('/docshare-edit/{docFile}', [DocFileController::class, 'update']);
 Route::delete('/docshare-edit/{docFile}', [DocFileController::class, 'destroy']);
+Route::get('/docshare-download/{docFile}', [DocFileController::class, 'download'])->name('docshare.download');

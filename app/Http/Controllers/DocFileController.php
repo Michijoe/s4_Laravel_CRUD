@@ -36,7 +36,7 @@ class DocFileController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'title_fr' => 'nullable|string|max:255',
-            'file_name' => 'required|mimes:pdf,zip,doc|max:10240',
+            'file_name' => 'required|mimes:pdf,zip,doc,docx|max:10240',
         ]);
 
         // Enregistrer le fichier
@@ -133,5 +133,18 @@ class DocFileController extends Controller
         $docFile->delete();
 
         return redirect(route('docshare.index'))->withSuccess(trans('modale.deleteDoc'));
+    }
+
+    /**
+     * Download the specified resource from storage.
+     */
+    public function download(DocFile $docFile)
+    {
+        $filePath = storage_path('app/public/documents/' . $docFile->file_name);
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        } else {
+            return redirect(route('docshare.index'));
+        }
     }
 }

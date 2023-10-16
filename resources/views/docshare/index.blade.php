@@ -28,7 +28,7 @@
                         <td>{{$docfile->created_at->format('Y-m-d')}}</td>
                         <td>
                             <!-- Download -->
-                            <a href="{{ asset('storage/documents/' . $docfile->file_name) }}" download="{{ $docfile->file_name }}" class="btn btn-outline-secondary">{{ __('Download') }}</a>
+                            <a href="{{ route('docshare.download', $docfile) }}" class="btn btn-outline-secondary">{{ __('Download') }}</a>
                             @if (Auth::user()->id == $docfile->user_id)
                             <!-- Modifier -->
                             <a href="{{route('docshare.edit', $docfile->id)}}" class="btn btn-outline-primary">{{ __('Update') }}</a>
