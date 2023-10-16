@@ -16,16 +16,20 @@
 
 Création d'une application web avec Laravel et SQL qui propose aux étudiants d'un collège un espace virtuel pour partager de l'information et des documents.
 
+##### Connexion et création de compte
 Un étudiant inscrit sur la plateforme doit se connecter à son compte pour accéder au contenu.
-Chaque étudiant connecté peut ajouter un nouvel étudiant qui recevra un courriel d'activation de compte.
-Une fois connecté, un étudiant peut accéder à la liste de tous les étudiants et de leurs informations, à tous les articles et à tous les fichiers partagés.
-Un étudiant peut modifier ou supprimer ses propres informations, ainsi que les articles qu'il a rédigés et les fichiers qu'il a partagés.
+Seul un étudiant déjà inscrit et connecté peut ajouter un nouvel étudiant. Le nouvel étudiant créé recevra un courriel d'activation de compte à partir duquel il pourra choisir son mot de passe.
 
-La plateforme est multilingue, anglais (par défaut) et français.
-Tout le contenu du site peut être affiché en anglais ou en français. 
+##### Accès et autorisations
+Seul les étudiants connectés peuvent accéder à la liste de tous les étudiants et de leurs informations, ainsi qu'à tous les articles et à tous les fichiers partagés.
+Un étudiant peut modifier ou supprimer uniquement ses propres informations, ainsi que les articles qu'il a rédigés et les fichiers qu'il a partagés.
+
+##### Choix de langue et affichage du contenu
+La plateforme est multilingue, tout le contenu du site peut être affiché en anglais (par défaut) et en français.
 Les étudiants sont invités à créer du contenu dans les deux langues, l'anglais est obligatoire et le français est optionnel.
+Le titre et le contenu d'un article, ainsi que le titre d'un document sont affichés dans la langue qui est sélectionnée dans le menu. Si la version française n'existe pas, la version anglaise par défaut est affichée.
 
-**Testez l'application avec un utilisateur par défaut**
+👩‍💻 **Testez l'application avec un utilisateur par défaut**
 - courriel : tbins@example.com
 - mdp : Maisonneuve!1234
 
