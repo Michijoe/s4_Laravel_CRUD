@@ -65,36 +65,36 @@ Lien vers l'application : [NewLodge College Network](https://network.johannapene
 ## 🚀 Command lines
 
 *Création du projet*
-`composer create-project --prefer-dist laravel/laravel Maisonneuve2296540`
+  - `composer create-project --prefer-dist laravel/laravel Maisonneuve2296540`
 
 *Création des modèles*
-  `php artisan make:model Etudiant -m`
-  `php artisan make:model Ville -m`
-  `php artisan make:model ForumPost -m`
-  `php artisan make:model DocFile -m`
+  - `php artisan make:model Etudiant -m`
+  - `php artisan make:model Ville -m`
+  - `php artisan make:model ForumPost -m`
+  - `php artisan make:model DocFile -m`
 
 *Création des tables*
-`php artisan migrate`
+  - `php artisan migrate`
 
 *Génération de données de tests (15 villes, 100 étudiants, 20 articles)*
-`php artisan make:factory VilleFactory`
-`php artisan make:factory EtudiantFactory`
-`php artisan make:factory ForumPostFactory`
-`php artisan tinker`
-`\App\Models\Ville::factory()->times(15)->create()`
-`\App\Models\Etudiant::factory()->times(100)->create()`
-`\App\Models\ForumPost::factory()->times(20)->create()`
+  - `php artisan make:factory VilleFactory`
+  - `php artisan make:factory EtudiantFactory`
+  - `php artisan make:factory ForumPostFactory`
+  - `php artisan tinker`
+  - `\App\Models\Ville::factory()->times(15)->create()`
+  - `\App\Models\Etudiant::factory()->times(100)->create()`
+  - `\App\Models\ForumPost::factory()->times(20)->create()`
 
 *Création des controllers*
-`php artisan make:controller EtudiantController -m Etudiant`
-`php artisan make:controller CustomAuthController -m User`
-`php artisan make:controller ForumPostController -m ForumPost`
-`php artisan make:controller DocFileController -m DocFile`
-`php artisan make:controller LocalizationController`
+  - `php artisan make:controller EtudiantController -m Etudiant`
+  - `php artisan make:controller CustomAuthController -m User`
+  - `php artisan make:controller ForumPostController -m ForumPost`
+  - `php artisan make:controller DocFileController -m DocFile`
+  - `php artisan make:controller LocalizationController`
 
 *Création du dossier lang et du middleware multilangue*
-`php artisan lang:publish`
-`php artisan make:middleware Localization`
+  - `php artisan lang:publish`
+  - `php artisan make:middleware Localization`
 
 ## 🤖 Built With
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white) ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white) ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
