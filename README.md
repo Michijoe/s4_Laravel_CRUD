@@ -28,7 +28,7 @@ Les étudiants sont invités à créer du contenu dans les deux langues, l'angla
 - courriel : tbins@example.com
 - mdp : Maisonneuve!1234
 
-Lien vers l'application : [NewLodge College Network](https://network.johannapenet.com/)
+**Lien vers l'application :** [NewLodge College Network](https://network.johannapenet.com/)
 
 ## 🎯 Features
 
