@@ -16,6 +16,11 @@
                     <label for="password">{{ __('Password') }}</label>
                     <input type="password" id="password" name="password" class="form-control">
                 </div>
+                <div class="mt-2 text-center d-flex flex-column gap-2">
+                    <strong>{{ __('Test user') }} :</strong>
+                    <span>{{ __('Email') }}: tbins@example.com</span>
+                    <span>{{ __('Password') }}: Maisonneuve!1234</span>
+                </div>
             </div>
             <div class="card-footer text-center">
                 <input type="submit" class="btn btn-primary" value="{{ __('Login') }}">

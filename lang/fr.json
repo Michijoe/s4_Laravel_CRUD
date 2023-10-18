@@ -49,5 +49,6 @@
     "Confirm password": "Confirmer le mot de passe",
     "Save": "Envoyer",
     "Password reset": "Réinitialisation du mot de passe",
-    "Account activation": "Activation du compte"
+    "Account activation": "Activation du compte",
+    "Test user": "Utilisateur test"
 }
